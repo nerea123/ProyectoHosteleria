@@ -4,6 +4,8 @@
  */
 package proyectohosteleria;
 
+import java.awt.Dimension;
+import java.awt.Toolkit;
 import java.io.File;
 import javax.swing.JFrame;
 
@@ -21,7 +23,17 @@ public class ProyectoHosteleria {
                  new VistaConfiguracion(new JFrame(),true).setVisible(true);
              }
              else
-                 new VistaPrincipal().setVisible(true);
+                 getResolucion();
                   //System.out.print("existe");
+    }
+    
+    public static void getResolucion(){
+    
+        Toolkit t = Toolkit.getDefaultToolkit();
+        Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+        if(screenSize.getWidth() < 1366 )
+            new VistaPrincipal1024().setVisible(true);
+        else 
+            new VistaPrincipal().setVisible(true);
     }
 }

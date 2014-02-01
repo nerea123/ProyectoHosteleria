@@ -17,13 +17,12 @@ import javax.swing.table.DefaultTableModel;
 
 /**
  *
- * @author Nerea 
+ * @author Nerea
  */
-public class VistaPrincipal extends javax.swing.JFrame implements IVista  {
+public class VistaPrincipal extends javax.swing.JFrame  {
 
    private Dimension dim;
    private ModeloPrincipal modeloPrincipal=new ModeloPrincipal();
-   
    //public static boolean mesasAbiertas=false;
    
    
@@ -34,9 +33,6 @@ public class VistaPrincipal extends javax.swing.JFrame implements IVista  {
         bCobrar.setBounds(650, 537, 166, 45);
         bCobrar.setBackground(Color.green);
         
-        /*total.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        total.setForeground(new java.awt.Color(255, 255, 255));
-        total.setText("TOTAL");*/
         this.add(bCobrar);
         this.add(panel);
         this.add(new PanelImagen("imagenes/l1.jpg"));

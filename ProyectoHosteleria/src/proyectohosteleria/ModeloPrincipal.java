@@ -12,16 +12,9 @@ import java.awt.Color;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.IOException;
-import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
-import java.net.Socket;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Vector;
@@ -561,7 +554,7 @@ public class ModeloPrincipal implements Serializable {
             item.addActionListener(actionListener);
     }
      
-      public void vistaSeparar(JMenuItem item,final VistaPrincipal frame,final ModeloPrincipal principal){
+      public void vistaSeparar(JMenuItem item,final JFrame frame,final ModeloPrincipal principal){
     
          ActionListener actionListener = new ActionListener() {
 
@@ -569,14 +562,14 @@ public class ModeloPrincipal implements Serializable {
             public void actionPerformed(ActionEvent e) {
                 
                VistaSeparar separar= new VistaSeparar(frame,true);
-               separar.setModelo(modelo,frame,principal);
+               separar.setModelo(modelo,(VistaPrincipal)frame,principal);
                separar.setVisible(true);
             }
         };
             item.addActionListener(actionListener);
     }
       
-       public void vistaEnvio(JMenuItem item,final VistaPrincipal frame,final JButton b){
+       public void vistaEnvio(JMenuItem item,final JFrame frame,final JButton b){
     
          ActionListener actionListener = new ActionListener() {
 
@@ -611,8 +604,9 @@ public class ModeloPrincipal implements Serializable {
 
             @Override
             public void actionPerformed(ActionEvent e) {
-                
-                System.exit(0);
+               int alert= Alerta.getInstance().creaAlertaWarning("¿Salir del programa?\n", "Cerrar", null);
+               if(alert == 0) 
+                     System.exit(0);
             }
         };
             button.addActionListener(actionListener);

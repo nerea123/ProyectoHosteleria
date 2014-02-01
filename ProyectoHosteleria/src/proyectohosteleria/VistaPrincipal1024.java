@@ -17,26 +17,23 @@ import javax.swing.table.DefaultTableModel;
 
 /**
  *
- * @author Nerea 
+ * @author Nerea
  */
-public class VistaPrincipal extends javax.swing.JFrame implements IVista  {
+public class VistaPrincipal1024 extends javax.swing.JFrame implements IVista  {
 
    private Dimension dim;
    private ModeloPrincipal modeloPrincipal=new ModeloPrincipal();
-   
    //public static boolean mesasAbiertas=false;
    
    
-    public VistaPrincipal() {
+    public VistaPrincipal1024() {
         initComponents();
+        System.out.print("1024");
         JButton bCobrar=new JButton("Cobrar");
         PanelImagen panel=new PanelImagen(566,383,250,200,"imagenes/l1.jpg");
         bCobrar.setBounds(650, 537, 166, 45);
         bCobrar.setBackground(Color.green);
         
-        /*total.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        total.setForeground(new java.awt.Color(255, 255, 255));
-        total.setText("TOTAL");*/
         this.add(bCobrar);
         this.add(panel);
         this.add(new PanelImagen("imagenes/l1.jpg"));
@@ -67,6 +64,7 @@ public class VistaPrincipal extends javax.swing.JFrame implements IVista  {
         modeloPrincipal.vistaModificar(modificarPrecio, this);
         modeloPrincipal.vistaAñadir(añadir, this);
         modeloPrincipal.vistaEliminar(eliminar, this);
+        //TODO arreglar separar: se le pasa parametro de Vistaprincipal
         modeloPrincipal.vistaSeparar(separar, this,modeloPrincipal);
         modeloPrincipal.vistaEnvio(envio, this,enviar);
         modeloPrincipal.ponActionListenerEnviar(enviar, this, jTable1);

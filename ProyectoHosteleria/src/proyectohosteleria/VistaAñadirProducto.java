@@ -6,6 +6,8 @@
 
 package proyectohosteleria;
 
+
+
 /**
  *
  * @author Nerea
@@ -159,6 +161,7 @@ public class VistaAñadirProducto extends javax.swing.JDialog {
             }
         });
     }
+ 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton añadir;
