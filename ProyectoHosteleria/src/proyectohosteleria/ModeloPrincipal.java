@@ -463,7 +463,7 @@ public class ModeloPrincipal implements Serializable {
         try {
             statement = (Statement) Conexion.getInstance().conectar().createStatement();
             idt=getIdt(statement)+1;
-            for(int e=numFila-1;e<modelo.getRowCount();e++){
+            for(int e=auxNumFila;e<modelo.getRowCount();e++){
                     for(int i=0;i<modelo.getColumnCount();i++){
                         ctabla[i]=table.getValueAt(e, i);
                   
@@ -472,7 +472,7 @@ public class ModeloPrincipal implements Serializable {
                     statement.executeUpdate("INSERT INTO pedidos (IDT,IDM,DESCRIPCION,CANTIDAD) VALUES ("+idt+","+idMesa+",'"+ctabla[0]+"',"+ctabla[2]+")");
                     
             }
-            
+            auxNumFila=numFila;
             statement.close();
         } catch (SQLException ex) {
             Logger.getLogger(ModeloPrincipal.class.getName()).log(Level.SEVERE, null, ex);
