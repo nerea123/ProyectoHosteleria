@@ -79,11 +79,11 @@ public class ModeloAñadirProducto {
             public void actionPerformed(ActionEvent e) {
                 boolean error=false;
                 if(nombre.getText().isEmpty()){
-                     Alerta.getInstance().creaAlerta("Debes introducir el nombre del producto","Error",dialog);
+                     Alerta.creaAlerta("Debes introducir el nombre del producto","Error",dialog);
                     error=true;
                 }
                 else if(precio.getText().isEmpty()){
-                     Alerta.getInstance().creaAlerta("Debes introducir el nombre del producto","Error",dialog);
+                     Alerta.creaAlerta("Debes introducir el nombre del producto","Error",dialog);
                     error=true;
                 }
                 
@@ -110,10 +110,10 @@ public class ModeloAñadirProducto {
                         dialog.dispose();
                         statement.close();
                     } catch (SQLException ex) {
-                       Alerta.getInstance().creaAlerta("Error al añadir el producto, por favor compruebe que todos los datos son correctos","Error",dialog);
+                       Alerta.creaAlerta("Error al añadir el producto, por favor compruebe que todos los datos son correctos","Error",dialog);
                         Logger.getLogger(ModeloAñadirProducto.class.getName()).log(Level.SEVERE, null, ex);
                     }catch(NumberFormatException num){
-                        Alerta.getInstance().creaAlerta("Error al añadir el precio, por favor compruebe que todos los datos son correctos","Error",dialog);
+                        Alerta.creaAlerta("Error al añadir el precio, por favor compruebe que todos los datos son correctos","Error",dialog);
                     }
                 }
             }

@@ -83,10 +83,10 @@ public class ModeloSeparar1024 {
 
             @Override
             public void actionPerformed(ActionEvent e) { 
-                int alerta = Alerta.getInstance().creaAlertaWarning("¿Cobrar cuenta?", "Cobrar", null);
+                int alerta = Alerta.creaAlertaWarning("¿Cobrar cuenta?", "Cobrar", null);
                 if(alerta==0){
                 darCambio(principal,label.getText());
-                int alert=Alerta.getInstance().creaAlertaWarning("¿Imprimir tiquet?", "Imprimir", new JDialog());
+                int alert=Alerta.creaAlertaWarning("¿Imprimir tiquet?", "Imprimir", new JDialog());
                 Imprimir.getInstance().abrirCajon();
                 if(alert==0){
                         Imprimir.getInstance().guardar(modelo, principal);
@@ -110,10 +110,10 @@ public class ModeloSeparar1024 {
             @Override
             public void actionPerformed(ActionEvent e) {
               
-                int alerta = Alerta.getInstance().creaAlertaWarning("¿Cobrar cuenta?", "Cobrar", null);
+                int alerta = Alerta.creaAlertaWarning("¿Cobrar cuenta?", "Cobrar", null);
                 if(alerta==0){
                 darCambio(principal,"");
-                int alert=Alerta.getInstance().creaAlertaWarning("¿Imprimir tiquet?", "Imprimir", new JDialog());
+                int alert=Alerta.creaAlertaWarning("¿Imprimir tiquet?", "Imprimir", new JDialog());
                 Imprimir.getInstance().abrirCajon();
                 if(alert==0){
                         Imprimir.getInstance().guardar(modelo, principal);

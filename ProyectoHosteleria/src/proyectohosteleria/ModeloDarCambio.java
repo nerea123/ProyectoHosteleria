@@ -60,7 +60,7 @@ public class ModeloDarCambio {
                 Float cambio=ModeloPrincipal.redondear(Float.parseFloat(texto.getText()),2);
                 cambio-=total;
                 cambio=ModeloPrincipal.redondear(cambio,2);
-                Alerta.getInstance().creaAlertaInf("El cambio es "+cambio, "Cambio", dialog);
+                Alerta.creaAlertaInf("El cambio es "+cambio, "Cambio", dialog);
                 if(cobrar.equals(""))
                     principal.setTotal(0);
                 dialog.dispose();

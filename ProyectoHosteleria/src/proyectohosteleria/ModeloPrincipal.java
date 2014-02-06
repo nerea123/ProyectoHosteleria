@@ -280,13 +280,13 @@ public class ModeloPrincipal implements Serializable {
 
             @Override
             public void actionPerformed(ActionEvent e) {
-                int alerta = Alerta.getInstance().creaAlertaWarning("¿Cobrar cuenta?", "Cobrar", null);
+                int alerta = Alerta.creaAlertaWarning("¿Cobrar cuenta?", "Cobrar", null);
               if(alerta==0){
                     insertarDatos(label, frame, table, modelo);
                     VistaDarCambio cambio=new VistaDarCambio(frame, true);                    
                     cambio.setModeloPrincipal(principal,"");
                     cambio.setVisible(true);
-                    int alert=Alerta.getInstance().creaAlertaWarning("¿Imprimir tiquet?", "Imprimir", cambio);
+                    int alert=Alerta.creaAlertaWarning("¿Imprimir tiquet?", "Imprimir", cambio);
                      Imprimir.getInstance().abrirCajon();
                     if(alert==0){
                         Imprimir.getInstance().guardar(modelo, principal);
@@ -619,7 +619,7 @@ public class ModeloPrincipal implements Serializable {
 
             @Override
             public void actionPerformed(ActionEvent e) {
-               int alert= Alerta.getInstance().creaAlertaWarning("¿Salir del programa?\n", "Cerrar", null);
+               int alert= Alerta.creaAlertaWarning("¿Salir del programa?\n", "Cerrar", null);
                if(alert == 0) 
                      System.exit(0);
             }

@@ -44,24 +44,24 @@ public class ModeloConfiguracion implements ActionListener {
     private boolean validar(){
         boolean error=false;
         if(datos.getNombreBd().isEmpty()){
-             Alerta.getInstance().creaAlerta("Debes introducir el nombre de la base de datos","Error",datos);
+             Alerta.creaAlerta("Debes introducir el nombre de la base de datos","Error",datos);
             error=true;
         }
         else if(datos.getpswBd().isEmpty()){
-             Alerta.getInstance().creaAlerta("Debes introducir la contraseña de la base de datos","Error",datos);
+             Alerta.creaAlerta("Debes introducir la contraseña de la base de datos","Error",datos);
             error=true;
         }
         else if(datos.getPuerto().isEmpty()){
-            Alerta.getInstance().creaAlerta("Debes introducir el puerto","Error",datos);
+            Alerta.creaAlerta("Debes introducir el puerto","Error",datos);
             error=true;
         }
             
         else if(datos.getServidor().isEmpty()){
-            Alerta.getInstance().creaAlerta("Debes introducir el servidor","Error",datos);
+            Alerta.creaAlerta("Debes introducir el servidor","Error",datos);
             error=true;
         }
         else if(datos.getUsuario().isEmpty()){
-           Alerta.getInstance().creaAlerta("Debes introducir el usuario la base de datos","Error",datos);
+           Alerta.creaAlerta("Debes introducir el usuario la base de datos","Error",datos);
             error=true;
         }
         return error;

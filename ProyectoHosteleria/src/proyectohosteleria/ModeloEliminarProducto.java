@@ -75,11 +75,11 @@ public class ModeloEliminarProducto {
         @Override
         public void actionPerformed(ActionEvent e) {
             
-            int alerta=Alerta.getInstance().creaAlertaWarning("¿Eliminar "+productos.getSelectedValue().toString()+" ?","Eliminar",dialog);
+            int alerta=Alerta.creaAlertaWarning("¿Eliminar "+productos.getSelectedValue().toString()+" ?","Eliminar",dialog);
             if(alerta ==0){
                 try {
                     statement.executeUpdate("DELETE FROM productos WHERE DESCRIPCION='"+productos.getSelectedValue().toString()+"'" );
-                    Alerta.getInstance().creaAlertaInf("Se ha eliminado el producto, debe reiniciar el programa", "Producto eliminado", dialog);
+                    Alerta.creaAlertaInf("Se ha eliminado el producto, debe reiniciar el programa", "Producto eliminado", dialog);
                 } catch (SQLException ex) {
                     Logger.getLogger(ModeloEliminarProducto.class.getName()).log(Level.SEVERE, null, ex);
                 }
