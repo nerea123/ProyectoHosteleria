@@ -19,7 +19,7 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author Nerea
  */
-public class VistaPrincipal1024 extends javax.swing.JFrame implements IVista  {
+public class VistaPrincipal1024 extends javax.swing.JFrame  {
 
    private Dimension dim;
    private ModeloPrincipal modeloPrincipal=new ModeloPrincipal();
@@ -65,7 +65,7 @@ public class VistaPrincipal1024 extends javax.swing.JFrame implements IVista  {
         modeloPrincipal.vistaAñadir(añadir, this);
         modeloPrincipal.vistaEliminar(eliminar, this);
         //TODO arreglar separar: se le pasa parametro de Vistaprincipal
-        modeloPrincipal.vistaSeparar(separar, this,modeloPrincipal);
+        modeloPrincipal.vistaSeparar1024(separar, this,modeloPrincipal);
         modeloPrincipal.vistaEnvio(envio, this,enviar);
         modeloPrincipal.ponActionListenerEnviar(enviar, this, jTable1);
         modeloPrincipal.ponActionListenerSalir(Salir);

@@ -569,6 +569,21 @@ public class ModeloPrincipal implements Serializable {
             item.addActionListener(actionListener);
     }
       
+      public void vistaSeparar1024(JMenuItem item,final JFrame frame,final ModeloPrincipal principal){
+    
+         ActionListener actionListener = new ActionListener() {
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                
+               VistaSeparar1024 separar= new VistaSeparar1024(frame,true);
+               separar.setModelo(modelo,(VistaPrincipal1024)frame,principal);
+               separar.setVisible(true);
+            }
+        };
+            item.addActionListener(actionListener);
+    }
+      
        public void vistaEnvio(JMenuItem item,final JFrame frame,final JButton b){
     
          ActionListener actionListener = new ActionListener() {

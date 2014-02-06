@@ -6,9 +6,11 @@
 
 package proyectohosteleria;
 
+import javax.swing.JFrame;
 import javax.swing.JLabel;
 
 
 public interface IVista {
-   JLabel total=new JLabel(); 
+    JLabel getLabelTotal();
+    JFrame getJFrame();
 }
