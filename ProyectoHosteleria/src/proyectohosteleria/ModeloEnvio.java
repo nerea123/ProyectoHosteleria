@@ -6,7 +6,6 @@
 
 package proyectohosteleria;
 
-import java.awt.TextField;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.FileWriter;
@@ -21,7 +20,7 @@ import javax.swing.JTextField;
  */
 public class ModeloEnvio {
     
-    public void ponActionListener(JButton boton,final JButton b,final JTextField server, final JTextField movil,final JTextField puerto,final JDialog dialog){
+    public void ponActionListener(JButton boton,final JButton b,final JTextField server, final JTextField movil,final JDialog dialog){
     
         ActionListener action =new ActionListener() {
 
@@ -36,7 +35,7 @@ public class ModeloEnvio {
  
             pw.println("IP servidor: " + server.getText());
             pw.println("IP movil: " + movil.getText());
-            pw.println("Puerto: "+puerto.getText());
+            pw.println("Puerto: 1234");
             
             
             fichero.close();
