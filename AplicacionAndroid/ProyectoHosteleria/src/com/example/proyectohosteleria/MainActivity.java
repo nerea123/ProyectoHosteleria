@@ -46,7 +46,7 @@ public class MainActivity extends ListActivity {
 
 		private ProgressDialog pDialog;
 
-		private static String ip="192.168.1.134";
+		private static String ip;
 		// objeto JSON Parser
 		JSONParser jParser = new JSONParser();
 
@@ -75,7 +75,10 @@ public class MainActivity extends ListActivity {
 		ServicioRed.getActivity(this);
 		ip= ServicioRed.getIp();
 		
-		System.out.println(ip);
+		
+		url_all_products = "http://"+ip+"/PHP/get_pedidos.php";
+		delete_product = "http://"+ip+"/PHP/delete_pedido.php";
+		
 		adapter=new Adaptador(this);
 		// Hashmap for ListView
 		productsList = new ArrayList<HashMap<String, String>>();
