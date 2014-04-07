@@ -29,7 +29,7 @@ public class ModeloSeparar1024 {
          table.setModel(modelo);
          
          totalF=principal.getTotal();
-         total.setText(String.valueOf(ModeloPrincipal.redondear(principal.getTotal(),2)));
+         total.setText("TOTAL: "+String.valueOf(ModeloPrincipal.redondear(principal.getTotal(),2)));
          
          for(int i=0;i<modelo.getColumnCount();i++)
             model.addColumn(modelo.getColumnName(i));

@@ -80,6 +80,7 @@ public class ModeloEliminarProducto {
                 try {
                     statement.executeUpdate("DELETE FROM productos WHERE DESCRIPCION='"+productos.getSelectedValue().toString()+"'" );
                     Alerta.creaAlertaInf("Se ha eliminado el producto, debe reiniciar el programa", "Producto eliminado", dialog);
+                    dialog.dispose();
                 } catch (SQLException ex) {
                     Logger.getLogger(ModeloEliminarProducto.class.getName()).log(Level.SEVERE, null, ex);
                 }

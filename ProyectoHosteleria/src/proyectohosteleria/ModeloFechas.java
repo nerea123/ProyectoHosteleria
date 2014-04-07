@@ -6,11 +6,13 @@
 
 package proyectohosteleria;
 
+import com.toedter.calendar.JDateChooser;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.text.SimpleDateFormat;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JButton;
@@ -34,14 +36,15 @@ public class ModeloFechas {
         table.setModel(modelo);
     }
 
-    public void rellenaTabla(JLabel label,JTextField INICIO,JTextField FIN){
+    public void rellenaTabla(JLabel label,JDateChooser INICIO,JDateChooser FIN){
        
         Object[] fila=new Object[5];
+        SimpleDateFormat formato = new SimpleDateFormat("yyyy/MM/dd");
         
         try {
             Statement statement=(Statement)Conexion.getInstance().conectar().createStatement();
             ResultSet resultset=statement.executeQuery("SELECT linea.IDT,CANTIDAD,PRECIO,DESCRIPCION,FECHA FROM "
-                    + "linea INNER JOIN tiquet ON linea.IDT=tiquet.IDT where FECHA BETWEEN '"+INICIO.getText()+"' AND '"+FIN.getText()+"'");
+                    + "linea INNER JOIN tiquet ON linea.IDT=tiquet.IDT where FECHA BETWEEN '"+formato.format(INICIO.getDate())+"' AND '"+formato.format(FIN.getDate())+"'");
             while(resultset.next()){
                 for(int i=0;i<5;i++)
                     fila[i]=resultset.getObject(i+1);
@@ -49,7 +52,7 @@ public class ModeloFechas {
             }
            resultset.close();
            
-           ResultSet result=statement.executeQuery("SELECT ROUND(SUM(PRECIO),2) FROM linea INNER JOIN tiquet ON linea.IDT=tiquet.IDT where FECHA BETWEEN '"+INICIO.getText()+"' AND '"+FIN.getText()+"'");
+           ResultSet result=statement.executeQuery("SELECT ROUND(SUM(PRECIO),2) FROM linea INNER JOIN tiquet ON linea.IDT=tiquet.IDT where FECHA BETWEEN '"+formato.format(INICIO.getDate())+"' AND '"+formato.format(FIN.getDate())+"'");
            result.next();
            label.setText("TOTAL: "+String.valueOf(result.getFloat(1)));
            
@@ -60,7 +63,7 @@ public class ModeloFechas {
       
     }
     
-    public void ponActionListener(JButton boton,final JLabel label,final JTextField INICIO,final JTextField FIN){
+    public void ponActionListener(JButton boton,final JLabel label,final JDateChooser INICIO,final JDateChooser FIN){
         
             ActionListener actionListener = new ActionListener() {
 
