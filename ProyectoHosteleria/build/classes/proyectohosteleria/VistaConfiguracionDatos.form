@@ -50,30 +50,34 @@
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Component id="jLabel4" alignment="0" min="-2" max="-2" attributes="0"/>
-                      <Group type="103" alignment="0" groupAlignment="1" max="-2" attributes="0">
-                          <Group type="102" attributes="0">
-                              <Component id="jLabel5" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace max="32767" attributes="0"/>
-                              <Component id="usuario" min="-2" pref="134" max="-2" attributes="0"/>
-                          </Group>
+                      <Group type="103" alignment="0" groupAlignment="1" attributes="0">
                           <Component id="jButton1" min="-2" max="-2" attributes="0"/>
-                          <Group type="102" attributes="0">
+                          <Group type="102" alignment="1" attributes="0">
                               <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="jLabel1" alignment="0" min="-2" max="-2" attributes="0"/>
-                                  <Component id="jLabel2" alignment="0" min="-2" max="-2" attributes="0"/>
-                                  <Component id="jLabel3" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  <Group type="102" alignment="1" attributes="0">
+                                      <Group type="103" groupAlignment="0" attributes="0">
+                                          <Component id="jLabel1" alignment="0" min="-2" max="-2" attributes="0"/>
+                                          <Component id="jLabel2" alignment="0" min="-2" max="-2" attributes="0"/>
+                                          <Component id="jLabel3" alignment="0" min="-2" max="-2" attributes="0"/>
+                                      </Group>
+                                      <EmptySpace min="-2" pref="49" max="-2" attributes="0"/>
+                                  </Group>
+                                  <Group type="102" alignment="0" attributes="0">
+                                      <Component id="jLabel5" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace min="-2" pref="72" max="-2" attributes="0"/>
+                                  </Group>
                               </Group>
-                              <EmptySpace min="-2" pref="49" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="puerto" min="-2" pref="134" max="-2" attributes="0"/>
-                                  <Component id="pwd" min="-2" pref="134" max="-2" attributes="0"/>
-                                  <Component id="bd" min="-2" pref="134" max="-2" attributes="0"/>
-                                  <Component id="ip1" alignment="0" min="-2" pref="134" max="-2" attributes="0"/>
+                                  <Component id="puerto" pref="134" max="32767" attributes="0"/>
+                                  <Component id="bd" pref="134" max="32767" attributes="0"/>
+                                  <Component id="ip1" alignment="0" pref="134" max="32767" attributes="0"/>
+                                  <Component id="pwd" alignment="0" max="32767" attributes="0"/>
+                                  <Component id="usuario" max="32767" attributes="0"/>
                               </Group>
                           </Group>
                       </Group>
                   </Group>
-                  <EmptySpace pref="37" max="32767" attributes="0"/>
+                  <EmptySpace min="-2" pref="37" max="-2" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -139,11 +143,6 @@
         </Component>
         <Component class="javax.swing.JTextField" name="bd">
         </Component>
-        <Component class="javax.swing.JTextField" name="pwd">
-          <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="pwdActionPerformed"/>
-          </Events>
-        </Component>
         <Component class="javax.swing.JTextField" name="puerto">
         </Component>
         <Component class="javax.swing.JButton" name="jButton1">
@@ -169,7 +168,9 @@
             <Property name="text" type="java.lang.String" value="Introduce el usuario de la base de datos"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JTextField" name="usuario">
+        <Component class="javax.swing.JPasswordField" name="pwd">
+        </Component>
+        <Component class="javax.swing.JPasswordField" name="usuario">
         </Component>
       </SubComponents>
     </Container>

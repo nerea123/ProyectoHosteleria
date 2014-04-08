@@ -19,7 +19,6 @@ public class ProyectoHosteleria {
      
             File fichero = new File("bar.conf");
              if (!fichero.exists()) {
-                 System.out.print("No existe");
                  new VistaConfiguracion(new JFrame(),true).setVisible(true);
              }
              else
