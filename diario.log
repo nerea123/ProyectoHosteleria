@@ -1,0 +1,53 @@
+Hasta hoy 08/04/2014 (50h)
+
+Lo primero que hice fue diseñar la base de datos ( lo siento algunas tablas están en plural ) y buscar imágenes para los productos ( Buscar las imagenes lleva más tiempo del que parece)
+
+-Diseño de la base de datos: 
+	-Tabla productos: tabla en la que se almacenan los productos con su id, su descripcion, familia, ruta de la imagen y precio.
+	-Tabla mesas: tabla en la que se almacenan las mesas del bar con su id y descripcion
+	-Tabla tiquet: en ella quedan almacenados los tiquets de los pedidos con su id, la mesa para la que se facturó el tiquet, la fecha y el total del coste.
+	Como nos puede interesar saber que productos son los vendidos en ese tiquet necesitamos una tabla linea que tendra todos los productos vendidos.
+	-Tabla linea: almacena los productos vendidos en cada tiquet 
+	
+-Una vez hecha la BD empecé con el proyecto. Al ser un proyecto que necesita constantemente de consultas a la BD creé una clase singleton de Conexion con la configuración necesaria para la conexión. 
+Me he basado en el modelo vista-controlador por lo que lo primero que hice fue crear una clase VistaPrincipal y un ModeloPrincipal ( me confundí al poner los nombres y todas las clases que empiezan por Modelo tendrían que empezar por Controlador). 
+Empecé generando los botones de los productos leyendolos de la BD y colocandolos en pestañas ya hechas en un jTabbedPane según la familia del producto. Una vez vi que funcionaba quité las pestañas ya hechas y pasé a generar las pestañas leyendo las familias de la BD.
+
+-Añadí a VistaPrincipal un JTable donde se mostrarán los productos, la cantidad y su precio y un jLabel debajo para mostrar el total de la suma de precio de todos los productos.
+
+-Añadí un botón para borrar el la fila seleccionada del JTable.
+
+-En el ModeloPrincipal creé los métodos necesarios para hacer lo citado anteriormente y en VistaPrincipal creé una instancia del ModeloPrincipal para llamar a sus métodos.
+
+-Busqué por internet como poner una imagen de fondo y con la información encontrada cree una clase PanelImagen que extiende de JPanel.
+
+-Puse botones del 0 al 9 para indicar la cantidad de productos pedidos. Estos botones se generan en un bucle y se ponen en un panel por lo que tuve que modificar la clase PanelImagen para poder generar y situar este panel correctamente. Junto a ellos situé el botón cobrar que te pregunta si quieres cobrar la cuenta y si quieres imprimir el tiquet. Si cobras la cuenta te permite dar el cambio ( ModeloDarCambio y VistaDarCambio),  los datos del jTable se guardan en la BD y se vacía el JTable. La opción de imprimir aún no hacía nada. Los mensajes o diálogos son generados mediante la llamada a métodos estáticos de la clase alerta.
+
+
+-Esta sería la estructura básica que necesitaría tener por cada mesa para poder saber los pedidos de cada una y cobrarlos. Por lo tanto es necesario un botón abrir mesas que nos permita elegir la mesa de la cual  vienen los pedidos, también es necesario saber que mesas están ocupadas y guardar los pedidos de cada una hasta que el cliente se vaya. Para esto creé dos clases nuevas ModeloMesas y VistaMesas. VistaMesas genera un JDialog con tantos botones como mesas hay en la BD que cambiarán su color a amarillo cada vez que se abra una mesa y volverán a su color original cuando se cierre. Teniendo esto en cuenta, no tiene sentido que se puedan crear más instancias de esta vista ya que lo que necesito es solo una instancia que me diga siempre que mesas están abiertas y cuales están cerradas por lo que hice de VistaMesas un singleton. En ModeloMesas creé todos los métodos necesarios para su funcionamiento, para no alargarme explicandolo copio un comentario explicativo de la función principal:  
+/*SE GUARDAN EN 3 ARRAYS LOS BOTONES DE MESAS QUE SE CREAN, VARIABLES BOOLEANAS QUE INDICAN SI YA SE HA INSTANCIADO
+        UN OBJETO DE TIPO VISTAPRINCIPAL RELACIONADO CON SU BOTON DE MESA Y OBJETOS DE TIPO VISTAPRINCIPAL.
+        CUANDO UN BOTON MESA ES PULSADO SE COMPRUEBA LA VARIABLE BOOLEANA QUE ESTA EN SU MISMO INDICE Y SI ESTA 
+        A FALSE SE INSTANCIA OBJETO VISTAPRINCIPAL DEL MISMO INDICCE Y SE PONE A TRUE, SI ESTA A TRUE SIMPLEMENTE SE MUESTRA EL 
+        OBJETO VISTAPRINCIPAL YA INSTANCIADO ANTERIORMENTE */
+		
+-Después creé la clase Imprimir que indicando el puerto al que está conectado la caja y la impresora y los códigos escpos de esta abre el cajón para cobrar, imprime el tiquet ( previamente guardado en un fichero )	y corta el papel. Añadí las llamadas necesarias al ModeloPrincipal en caso de pulsar si cuando te pregunta si quieres imprimir el ticket, pero aunque se pulse no es necesario al menos abrir el cajón.
+
+-Creé las clases ModeloConfiguración, VistaConfiguraciónDatos, VistaConfiguración para hacer un pequeño asistente que pida los datos necesarios para la conexión de la BD. Estos datos se guardan en un fichero ( bar.conf) . Al iniciar la aplicación se comprueba si ese fichero existe, si existe se lanza VistaPrincipal que obtiene los datos necesarios para la conexión de la clase Conexion y esta los lee del fichero generado y sino se lanza el asistente.
+
+-Seguí añadiendo un JMenuBar con opciones para ver el total recaudado el dia de hoy, ver el total de x fecha a x fecha, separar cuenta, modificar el precio de un producto, añadir producto, y eliminar un producto cada opción con sus respectivas vistas y modelos.
+
+-Añadí al JMenuBar la opción de habilitar envío y a la VISTAPRINCIPAL un botón envío. Para la opción habilitar envío creé las clases ModeloEnvio y VistaEnvio que piden la ip del servidor php y la ip del movil y lo guardan en un fichero envio.conf. Si este fichero existe el botón envio de VistaPrincipal se habilita.
+Lo que tiene que hacer este botón es enviar la ip del servidor php mediante un socket a la aplicación móvil por lo que creé la clase HiloEnvio que se encarga de ello. También tiene que guardar en la BD en la tabla pedidos el contenido del JTable y la mesa a la que hace referencia.
+
+-Creé los ficheros get_pedidos y delete_pedido. get_pedidos accede a la BD , obtiene los datos de la tabla pedido , y los devuelve en formato json.
+delete_pedido accede a la tabla pedido y borra el producto especificado.
+
+-Creé la aplicación android que dada una ip muestra lo que devuelven los ficheros php dentro de ese servidor según se quiera mostrar los pedidos o eliminar uno. La primera vez que se ejecuta como la variable ip está en blanco no hace nada pero mediante un socket que está a la escucha en la clase ServicioRed, cada vez que recibe un mensaje ( ip del servidor php) establece la variable ip del MainActivity con la ip recibida destruye la actividad en blanco y genera una nueva que al tener la variable ip con la ip del servidor ya puede mostrar los pedidos. Una vez mostrados se pueden ir eliminando uno por uno clicándo sobre ellos y apretando si cuando te pregunta si quieres eliminarlo.
+
+-Creé otra vista principal para resoluciones más pequeñas y modifiqué la aplicación para que al ejecutarse compruebe la resolución y muestre una vista u otra.
+
+-Cambié VistaFechas para que en vez de tener que escribir las fechas a buscar puedas elegirlas en un calendario.
+
+-Cambié en la VistaConfiguraciónDatos que al pedir el nombre de usuario de la BD y la contraseña estos fueran de tipo password.
+
