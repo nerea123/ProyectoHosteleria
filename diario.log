@@ -51,3 +51,18 @@ delete_pedido accede a la tabla pedido y borra el producto especificado.
 
 -Cambié en la VistaConfiguraciónDatos que al pedir el nombre de usuario de la BD y la contraseña estos fueran de tipo password.
 
+
+
+10/05/2014 6h 
+
+Mejorada base de datos.
+Detectado problema: duplicaion de pedido al cobrar cuenta y enviar pedido al movil
+Cambiado proyecto y ficheros php para funcionar con el nuevo diseño de la bd .
+
+-Eliminada tabla pedidos
+-Quitado de tabla linea campo descripcion (se obtiene directamente de la tabla productos )
+_Añadidos a tabla linea campo preparado ( este campo es un campo bit (0-1) que indica si el producto ya ha sido servido ) 
+-Modificado fichero delete_pedido: pone el campo preparado a 1 
+-Eliminado campo TOTAL de la tabla tiquet ( se obtiene mediante consulta)
+-Añadidos campos enviado, para saber si el pedido ha sido enviado al movil (este campo es el que utiliza el fichero php get_pedidos para saber que pedidos se muestran en el movil) y  cobrado para saber si la mesa se ha cobrado.
+
