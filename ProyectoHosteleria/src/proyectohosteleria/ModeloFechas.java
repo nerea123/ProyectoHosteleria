@@ -45,7 +45,8 @@ public class ModeloFechas {
             Statement statement=(Statement)Conexion.getInstance().conectar().createStatement();
             ResultSet resultset=statement.executeQuery("SELECT linea.IDT,CANTIDAD,PRECIO*CANTIDAD as PRECIO,DESCRIPCION,FECHA FROM "
                     + "linea INNER JOIN tiquet ON linea.IDT=tiquet.IDT"
-                    + " LEFT JOIN productos on linea.IDP=productos.IDP where FECHA BETWEEN '"+formato.format(INICIO.getDate())+"' AND '"+formato.format(FIN.getDate())+"'");
+                    + " LEFT JOIN productos on linea.IDP=productos.IDP where FECHA BETWEEN '"+formato.format(INICIO.getDate())+"' AND '"+formato.format(FIN.getDate())+"'"
+                    + "and COBRADO = 1");
             while(resultset.next()){
                 for(int i=0;i<5;i++)
                     fila[i]=resultset.getObject(i+1);
@@ -53,7 +54,7 @@ public class ModeloFechas {
             }
            resultset.close();
            
-           ResultSet result=statement.executeQuery("SELECT round(sum(CANTIDAD * PRECIO ),2) from linea left join productos on linea.IDP=productos.IDP inner join tiquet on linea.IDT=tiquet.IDT where FECHA BETWEEN '"+formato.format(INICIO.getDate())+"' AND '"+formato.format(FIN.getDate())+"'");
+           ResultSet result=statement.executeQuery("SELECT round(sum(CANTIDAD * PRECIO ),2) from linea left join productos on linea.IDP=productos.IDP inner join tiquet on linea.IDT=tiquet.IDT where FECHA BETWEEN '"+formato.format(INICIO.getDate())+"' AND '"+formato.format(FIN.getDate())+"' and COBRADO = 1");
            result.next();
            label.setText("TOTAL: "+String.valueOf(result.getFloat(1)));
            

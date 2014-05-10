@@ -293,7 +293,13 @@ public class ModeloPrincipal implements Serializable {
             public void actionPerformed(ActionEvent e) {
                 int alerta = Alerta.creaAlertaWarning("¿Cobrar cuenta?", "Cobrar", null);
               if(alerta==0){
-                   
+                    try {
+                        Statement statement = (Statement)Conexion.getInstance().conectar().createStatement();
+                        VistaPrincipal p=(VistaPrincipal)frame;
+                        statement.executeUpdate("update tiquet set COBRADO=1 where IDT="+p.getIdtiquet() );
+                    } catch (SQLException ex) {
+                        Logger.getLogger(ModeloPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+                    }
                     VistaDarCambio cambio=new VistaDarCambio(frame, true);                    
                     cambio.setModeloPrincipal(principal,"");
                     cambio.setVisible(true);
