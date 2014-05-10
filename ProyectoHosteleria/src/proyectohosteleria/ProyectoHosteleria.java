@@ -30,9 +30,13 @@ public class ProyectoHosteleria {
     
         Toolkit t = Toolkit.getDefaultToolkit();
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-        if(screenSize.getWidth() < 1366 )
+        if(screenSize.getWidth() < 1366 ){
             new VistaPrincipal1024().setVisible(true);
-        else 
-            new VistaPrincipal().setVisible(true);
+        }
+        else {
+            VistaPrincipal principal= new VistaPrincipal();
+            
+            principal.setVisible(true);
+        }
     }
 }

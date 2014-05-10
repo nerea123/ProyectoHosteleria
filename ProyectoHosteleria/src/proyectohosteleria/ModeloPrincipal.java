@@ -15,6 +15,7 @@ import java.awt.event.ActionListener;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
+import java.sql.Array;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Vector;
@@ -194,7 +195,7 @@ public class ModeloPrincipal implements Serializable {
     }
 
     
-    public void ponActionListener(final JLabel label){
+    public void ponActionListener(final JLabel label,final JFrame principal){
         action=new ActionListener() {
 
             @Override
@@ -228,12 +229,22 @@ public class ModeloPrincipal implements Serializable {
                     setTotal(getTotal() + redondear(precio*getCantidad(),2));
                     stringTotal=String.valueOf(redondear(getTotal(),2));
                     label.setText("TOTAL: "+stringTotal);
+                    
+                    VistaPrincipal p=(VistaPrincipal)principal;
+                    int idt=p.getIdtiquet();
+
+                    ResultSet result=statement.executeQuery("select IDP from PRODUCTOS where DESCRIPCION='"+descripcion[0]+"'");
+                    result.next();
+                    int idp=result.getInt(1);
+                    result.close();
+                    statement.executeUpdate("insert into LINEA(IDT,IDP,CANTIDAD) values("+idt+","+idp+","+cantidad+")");
+                    statement.close();
                     cantidad=1;stringCantidad="";
 
                     rs.close();
                     numFila++;
                     cantidad=1;    
-
+                     
 
                 }catch (SQLException ex) {
                     ex.printStackTrace();
@@ -282,7 +293,7 @@ public class ModeloPrincipal implements Serializable {
             public void actionPerformed(ActionEvent e) {
                 int alerta = Alerta.creaAlertaWarning("¿Cobrar cuenta?", "Cobrar", null);
               if(alerta==0){
-                    insertarDatos(label, frame, table, modelo);
+                   
                     VistaDarCambio cambio=new VistaDarCambio(frame, true);                    
                     cambio.setModeloPrincipal(principal,"");
                     cambio.setVisible(true);
@@ -319,22 +330,47 @@ public class ModeloPrincipal implements Serializable {
     
     }
     
-    public void ponerActionListenerBotonBorrarFila(JButton fila, final JTable table,final JLabel label){
+    public void ponerActionListenerBotonBorrarFila(JButton fila, final JTable table,final JLabel label,final JFrame principal){
     
          
         ActionListener actionListener=new ActionListener(){
 
             @Override
             public void actionPerformed(ActionEvent e) {
-                int filaSeleccionada=table.getSelectedRow();
-                float precio=(float) modelo.getValueAt(filaSeleccionada, 1);
-                int cantidad=(int) modelo.getValueAt(filaSeleccionada, 2);
-
-                setTotal(getTotal() - cantidad*precio);
-                setTotal(redondear(getTotal(), 2));
-                modelo.removeRow(table.getSelectedRow());
-                label.setText(String.valueOf(getTotal()));
-                numFila--;
+                try {
+                    int filaSeleccionada=table.getSelectedRow();
+                    float precio=(float) modelo.getValueAt(filaSeleccionada, 1);
+                    int cantidad=(int) modelo.getValueAt(filaSeleccionada, 2);
+                    
+                    setTotal(getTotal() - cantidad*precio);
+                    setTotal(redondear(getTotal(), 2));
+                    
+                    //Obtenemos los idl para el tiquet actual y borramos la linea que
+                    //petenece a la linea selecconada
+                    VistaPrincipal p=(VistaPrincipal)principal;
+                    int idt=p.getIdtiquet();
+                    Statement statement = (Statement)Conexion.getInstance().conectar().createStatement();
+                    ResultSet result=statement.executeQuery("select IDP from PRODUCTOS where DESCRIPCION='"+modelo.getValueAt(filaSeleccionada, 0)+"'");
+                    result.next();
+                    int idp=result.getInt(1);
+                    result.close();
+                    ResultSet r=statement.executeQuery("select IDL from linea where IDT="+idt);
+                    int contador = 0;
+                    while(contador<= filaSeleccionada){
+                        r.next();
+                        contador++;
+                    }
+                    
+                    int idl=r.getInt(1);
+                    statement.executeUpdate("delete from linea where idl=+"+idl);
+                    statement.close();
+                    
+                    modelo.removeRow(table.getSelectedRow());
+                    label.setText(String.valueOf(getTotal()));
+                    numFila--;
+                } catch (SQLException ex) {
+                    Logger.getLogger(ModeloPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
         };
         
@@ -365,8 +401,7 @@ public class ModeloPrincipal implements Serializable {
       for (int i=0;i<VistaMesas.getInstance().mesas.arrayMesas.length;i++) {
 
                     if(VistaMesas.getInstance().mesas.arrayVistaPrincipal[i] == frame){
-
-                        insertarDatos(label,frame,table,modelo);
+                       
                         VistaMesas.getInstance().mesas.estaAbiertoVistaPrincipal[i]=false;
                         VistaMesas.getInstance().mesas.arrayVistaPrincipal[i].dispose();
                         VistaMesas.getInstance().mesas.arrayMesas[i].setBackground(color);
@@ -383,22 +418,26 @@ public class ModeloPrincipal implements Serializable {
             return value.floatValue(); 
 }
     
-    public void insertarDatos(JLabel label,JFrame frame,JTable table,DefaultTableModel modelo){
+  /*  public void insertarDatos(JLabel label,JFrame frame,JTable table,DefaultTableModel modelo){
     
             try {
                 Statement statement;
-                String id=frame.getTitle();
-                int idMesa=0;
+                               
                 Vector o=modelo.getDataVector();
                 Object [] ctabla=new Object[o.size()*5];
                 System.out.print(o.size()*3);
                 statement = (Statement) Conexion.getInstance().conectar().createStatement();
                
-                //MIRAMOS SI HAY ALGUNA MESA ABIERTA. SI HAY ALGUNA COJEMOS SU IDMESA SINO LE ASIGNAMOS UNO
-                idMesa=getIdMesa(id);
-                statement.executeUpdate("INSERT INTO TIQUET (IDM,FECHA,TOTAL) VALUES ("+idMesa+",SYSDATE(),"+getTotal()+")");
-                int idt=getIdt(statement);
-                for(int e=0;e<modelo.getRowCount();e++){
+                //statement.executeUpdate("INSERT INTO TIQUET (IDM,FECHA) VALUES ("+idMesa+",SYSDATE())");
+                
+                int idt=0;
+                 for (int i=0;i<VistaMesas.getInstance().mesas.arrayMesas.length;i++) {
+                    if(VistaMesas.getInstance().mesas.arrayVistaPrincipal[i] == frame){
+                        idt=VistaMesas.getInstance().mesas.arrayVistaPrincipal[i].getIdtiquet();                        
+                     }
+                  }
+                 
+                /*for(int e=0;e<modelo.getRowCount();e++){
                     for(int i=0;i<modelo.getColumnCount();i++){
                         ctabla[i]=table.getValueAt(e, i);
                   
@@ -407,13 +446,13 @@ public class ModeloPrincipal implements Serializable {
                 result.next();
                 int idp=result.getInt(1);
                 result.close();
-                statement.executeUpdate("insert into LINEA(IDT,IDP,CANTIDAD,PRECIO,Descripcion) values("+idt+","+idp+","+ctabla[2]+","+ctabla[1]+",'"+ctabla[0]+"')");
-        }       statement.close();
+                statement.executeUpdate("insert into LINEA(IDT,IDP,CANTIDAD) values("+idt+","+idp+","+ctabla[2]+")");
+        //}   
         
         } catch (SQLException ex) {
             Logger.getLogger(ModeloPrincipal.class.getName()).log(Level.SEVERE, null, ex);
         }
-    }
+    }*/
     
     public int getIdMesa(String id){
         int idMesa=0;
@@ -441,7 +480,7 @@ public class ModeloPrincipal implements Serializable {
         try {
             ResultSet resultset=statement.executeQuery("select max(IDT) from TIQUET");
             resultset.next();
-            idt=resultset.getInt(1);
+            idt=resultset.getInt(1)+1;
             resultset.close();
         } catch (SQLException ex) {
             Logger.getLogger(ModeloPrincipal.class.getName()).log(Level.SEVERE, null, ex);
@@ -450,28 +489,38 @@ public class ModeloPrincipal implements Serializable {
     }
     
     
+    public void creaIdTiquet(VistaPrincipal principal){
+         Statement statement=null;
+         int idt=0,idMesa=0;
+         String id=principal.getTitle();
+       try {
+           statement = (Statement) Conexion.getInstance().conectar().createStatement();
+           //MIRAMOS SI HAY ALGUNA MESA ABIERTA. SI HAY ALGUNA COJEMOS SU IDMESA SINO LE ASIGNAMOS UNO
+                idMesa=getIdMesa(id);
+
+           idt=this.getIdt(statement);
+           statement.executeUpdate("insert into tiquet (IDT,IDM,FECHA) values("+idt+","+idMesa+", SYSDATE() )");
+       } catch (SQLException ex) {
+           Logger.getLogger(VistaPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+       }
+        principal.setIdtiquet(idt);
+         
+    }
+    
     public void insertaPedido(JFrame frame,DefaultTableModel modelo,JTable table){
     
         String id=frame.getTitle();
         int idMesa=getIdMesa(id);
-        Statement statement;
+        Statement statement=null;
         int idt=0;
                
         Vector o=modelo.getDataVector();
-        Object [] ctabla=new Object[o.size()*5];
-        System.out.print(o.size()*3);
+        VistaPrincipal p=(VistaPrincipal)frame;
+       idt= p.getIdtiquet();
         try {
             statement = (Statement) Conexion.getInstance().conectar().createStatement();
-            idt=getIdt(statement)+1;
-            for(int e=auxNumFila;e<modelo.getRowCount();e++){
-                    for(int i=0;i<modelo.getColumnCount();i++){
-                        ctabla[i]=table.getValueAt(e, i);
-                  
-                    }
-                    System.out.println(ctabla[0]);
-                    statement.executeUpdate("INSERT INTO pedidos (IDT,IDM,DESCRIPCION,CANTIDAD) VALUES ("+idt+","+idMesa+",'"+ctabla[0]+"',"+ctabla[2]+")");
-                    
-            }
+            statement.executeUpdate("UPDATE tiquet set ENVIADO=1 where IDT ="+idt); 
+            
             auxNumFila=numFila;
             statement.close();
         } catch (SQLException ex) {

@@ -4,10 +4,14 @@
  */
 package proyectohosteleria;
 
+import com.mysql.jdbc.Statement;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.io.File;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -23,6 +27,7 @@ public class VistaPrincipal extends javax.swing.JFrame {
 
    private Dimension dim;
    private ModeloPrincipal modeloPrincipal=new ModeloPrincipal();
+   private int idtiquet=0;
    
    //public static boolean mesasAbiertas=false;
    
@@ -33,7 +38,7 @@ public class VistaPrincipal extends javax.swing.JFrame {
         PanelImagen panel=new PanelImagen(566,383,250,200,"imagenes/l1.jpg");
         bCobrar.setBounds(650, 537, 166, 45);
         bCobrar.setBackground(Color.green);
-        
+       
         /*total.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         total.setForeground(new java.awt.Color(255, 255, 255));
         total.setText("TOTAL");*/
@@ -53,7 +58,8 @@ public class VistaPrincipal extends javax.swing.JFrame {
              else
                  enviar.setEnabled(true);
         
-        modeloPrincipal.ponActionListener(total);
+        modeloPrincipal.creaIdTiquet(this);
+        modeloPrincipal.ponActionListener(total,this);
         modeloPrincipal.ponBotonesCantidad(panel);
         modeloPrincipal.creaColumnas(jTable1);
         modeloPrincipal.añadirPestañas(jTabbedPane1);
@@ -61,7 +67,7 @@ public class VistaPrincipal extends javax.swing.JFrame {
         modeloPrincipal.ponActionListenerBotonDelTiempo(delTiempo);
         modeloPrincipal.ponActionListenerBotonCobrar(bCobrar,total,this,jTable1,new DefaultTableModel(),modeloPrincipal);
         modeloPrincipal.ponActionListenerBotonAbreMesas(mesa, this);
-        modeloPrincipal.ponerActionListenerBotonBorrarFila(borrar,jTable1,total);
+        modeloPrincipal.ponerActionListenerBotonBorrarFila(borrar,jTable1,total,this);
         modeloPrincipal.vistaHoy(totalHoy, this);
         modeloPrincipal.vistaFechas(visualizarFechas, this);
         modeloPrincipal.vistaModificar(modificarPrecio, this);
@@ -319,6 +325,20 @@ public class VistaPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenuItem totalHoy;
     private javax.swing.JMenuItem visualizarFechas;
     // End of variables declaration//GEN-END:variables
+
+    /**
+     * @return the idtiquet
+     */
+    public int getIdtiquet() {
+        return idtiquet;
+    }
+
+    /**
+     * @param idtiquet the idtiquet to set
+     */
+    public void setIdtiquet(int idtiquet) {
+        this.idtiquet = idtiquet;
+    }
 
    
     

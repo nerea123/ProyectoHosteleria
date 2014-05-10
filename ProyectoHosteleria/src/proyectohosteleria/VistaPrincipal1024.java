@@ -50,7 +50,7 @@ public class VistaPrincipal1024 extends javax.swing.JFrame  {
              else
                  enviar.setEnabled(true);
         
-        modeloPrincipal.ponActionListener(total);
+        modeloPrincipal.ponActionListener(total,this);
         modeloPrincipal.ponBotonesCantidad(panel);
         modeloPrincipal.creaColumnas(jTable1);
         modeloPrincipal.añadirPestañas(jTabbedPane1);
@@ -58,7 +58,7 @@ public class VistaPrincipal1024 extends javax.swing.JFrame  {
         modeloPrincipal.ponActionListenerBotonDelTiempo(delTiempo);
         modeloPrincipal.ponActionListenerBotonCobrar(bCobrar,total,this,jTable1,new DefaultTableModel(),modeloPrincipal);
         modeloPrincipal.ponActionListenerBotonAbreMesas(mesa, this);
-        modeloPrincipal.ponerActionListenerBotonBorrarFila(borrar,jTable1,total);
+        modeloPrincipal.ponerActionListenerBotonBorrarFila(borrar,jTable1,total,this);
         modeloPrincipal.vistaHoy(totalHoy, this);
         modeloPrincipal.vistaFechas(visualizarFechas, this);
         modeloPrincipal.vistaModificar(modificarPrecio, this);

@@ -93,7 +93,7 @@ public class ModeloSeparar {
                         Imprimir.getInstance().escribir("tiquet.txt");
                         Imprimir.getInstance().cortar();
                     }
-                principal.insertarDatos(label, frame, table, model);
+                
                 label.setText("TOTAL: 0");
                 for(int i=model.getRowCount();i>0;i--)
                       model.removeRow(i-1);
@@ -120,7 +120,7 @@ public class ModeloSeparar {
                         Imprimir.getInstance().escribir("tiquet.txt");
                         Imprimir.getInstance().cortar();
                     }
-                principal.insertarDatos(label, frame, table, modelo);
+               
                 lab.setText("TOTAL: 0");
                 frame.total.setText("TOTAL: 0");
                 principal.setNumFila(0);

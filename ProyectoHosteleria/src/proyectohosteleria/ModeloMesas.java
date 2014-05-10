@@ -28,8 +28,8 @@ public class ModeloMesas implements ActionListener {
     JDialog jMesa;
     boolean estaAbiertoVistaPrincipal[];
     VistaPrincipal arrayVistaPrincipal[];
-     JButton arrayMesas[];
-   
+    JButton arrayMesas[];
+       
     public ModeloMesas(){
     
         estaAbiertoVistaPrincipal=new boolean[getNumMesas()];
