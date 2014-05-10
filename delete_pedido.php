@@ -19,7 +19,7 @@ if (isset($_POST['IDL'])) {
     $db = new DB_CONNECT();
 
     // mysql update row with matched pid
-    $result = mysql_query("DELETE FROM pedidos WHERE IDL = $IDL");
+    $result = mysql_query("UPDATE linea set PREPARADO=1 WHERE IDL = $IDL");
     
     // check if row deleted or not
     if (mysql_affected_rows() > 0) {

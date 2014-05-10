@@ -6,7 +6,11 @@ require_once __DIR__ . '/db_connect.php';
 $db = new DB_CONNECT();
 
 // get all products from products table
-$result = mysql_query("SELECT *FROM pedidos") or die(mysql_error());
+$result = mysql_query("SELECT tiquet.IDT, tiquet.IDM, IDL, DESCRIPCION, CANTIDAD 
+						FROM tiquet 
+						LEFT JOIN linea ON linea.IDT=tiquet.IDT 
+						LEFT JOIN productos on linea.IDP=productos.IDP 
+						where ENVIADO = 1 and PREPARADO=0") or die(mysql_error());
 
 // check for empty result
 if (mysql_num_rows($result) > 0) {
