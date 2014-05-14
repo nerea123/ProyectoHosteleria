@@ -34,7 +34,7 @@ public class ProyectoHosteleria {
             new VistaPrincipal1024().setVisible(true);
         }
         else {
-            VistaPrincipal principal= new VistaPrincipal();
+            VistaPrincipal principal= new VistaPrincipal("Terminal hostelería");
             
             principal.setVisible(true);
         }

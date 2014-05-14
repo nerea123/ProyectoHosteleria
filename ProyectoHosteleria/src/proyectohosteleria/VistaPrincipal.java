@@ -31,6 +31,12 @@ public class VistaPrincipal extends javax.swing.JFrame {
    
    //public static boolean mesasAbiertas=false;
    
+    public VistaPrincipal(String titulo) {
+        //se llama al otro constructor
+        this();
+        this.setTitle(titulo);
+         modeloPrincipal.creaIdTiquet(this);
+    }
    
     public VistaPrincipal() {
         initComponents();
@@ -58,7 +64,7 @@ public class VistaPrincipal extends javax.swing.JFrame {
              else
                  enviar.setEnabled(true);
         
-        modeloPrincipal.creaIdTiquet(this);
+       
         modeloPrincipal.ponActionListener(total,this);
         modeloPrincipal.ponBotonesCantidad(panel);
         modeloPrincipal.creaColumnas(jTable1);

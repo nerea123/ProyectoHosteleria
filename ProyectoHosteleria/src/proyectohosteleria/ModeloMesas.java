@@ -97,9 +97,9 @@ public class ModeloMesas implements ActionListener {
         //ModeloPrincipal.mesas=(VistaMesas)jMesa;
         for(int i=0;i<arrayMesas.length;i++){
             if(arrayMesas[i] == boton && estaAbiertoVistaPrincipal[i]== false){
-                arrayVistaPrincipal[i]=new VistaPrincipal();
+                arrayVistaPrincipal[i]=new VistaPrincipal(boton.getText());
                 //arrayVistaPrincipal[i].mesasAbiertas=true;
-                arrayVistaPrincipal[i].setTitle(boton.getText());
+                //arrayVistaPrincipal[i].setTitle(boton.getText());
                 arrayVistaPrincipal[i].setDefaultCloseOperation(DISPOSE_ON_CLOSE);
                 arrayVistaPrincipal[i].setVisible(true);
                 estaAbiertoVistaPrincipal[i]=true;

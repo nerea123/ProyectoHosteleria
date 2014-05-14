@@ -460,15 +460,17 @@ public class ModeloPrincipal implements Serializable {
         }
     }*/
     
-    public int getIdMesa(String id){
+    public int getIdMesa(String id){System.out.println("id"+id);
         int idMesa=0;
         for(int i=0;i<VistaMesas.getInstance().mesas.arrayMesas.length;i++){
                     if(VistaMesas.getInstance().mesas.estaAbiertoVistaPrincipal[i]==true){
                         try {
+                            Statement statement = (Statement)Conexion.getInstance().conectar().createStatement();
                             ResultSet resultset=statement.executeQuery("SELECT IDM FROM mesas WHERE DESCRIPCION='"+id+"'");
                             while(resultset.next())
                                 idMesa=resultset.getInt(1);
                             resultset.close();
+                            statement.close();
                             break;
                         } catch (SQLException ex) {
                             Logger.getLogger(ModeloPrincipal.class.getName()).log(Level.SEVERE, null, ex);
