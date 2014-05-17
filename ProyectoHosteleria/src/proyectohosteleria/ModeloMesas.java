@@ -101,6 +101,7 @@ public class ModeloMesas implements ActionListener {
                 //arrayVistaPrincipal[i].mesasAbiertas=true;
                 //arrayVistaPrincipal[i].setTitle(boton.getText());
                 arrayVistaPrincipal[i].setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+                arrayVistaPrincipal[i].getSalir().setVisible(false);
                 arrayVistaPrincipal[i].setVisible(true);
                 estaAbiertoVistaPrincipal[i]=true;
             }

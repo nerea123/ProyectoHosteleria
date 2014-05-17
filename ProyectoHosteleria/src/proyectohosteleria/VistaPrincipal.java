@@ -87,6 +87,10 @@ public class VistaPrincipal extends javax.swing.JFrame {
         
        
     }
+    
+    public JButton getSalir(){
+        return Salir;
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -163,6 +167,11 @@ public class VistaPrincipal extends javax.swing.JFrame {
         Salir.setBackground(new java.awt.Color(204, 0, 0));
         Salir.setForeground(new java.awt.Color(255, 255, 255));
         Salir.setText("Salir");
+        Salir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                SalirActionPerformed(evt);
+            }
+        });
 
         jMenu3.setText("Ver");
 
@@ -265,6 +274,10 @@ public class VistaPrincipal extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void SalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SalirActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_SalirActionPerformed
 
     /**
      * @param args the command line arguments
