@@ -3,13 +3,12 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/Nerea/Documents/GitHub/Proyecto/ProyectoHosteleria/src/proyectohosteleria/ModeloVistaHoy.java</file>
-            <file>file:/C:/Users/Nerea/Documents/GitHub/Proyecto/ProyectoHosteleria/src/proyectohosteleria/ModeloEnvio.java</file>
             <file>file:/C:/Users/Nerea/Documents/GitHub/Proyecto/ProyectoHosteleria/src/proyectohosteleria/ModeloPrincipal.java</file>
-            <file>file:/C:/Users/Nerea/Documents/GitHub/Proyecto/ProyectoHosteleria/src/proyectohosteleria/Imprimir.java</file>
+            <file>file:/C:/Users/Nerea/Documents/GitHub/Proyecto/ProyectoHosteleria/src/proyectohosteleria/VistaPrincipal.java</file>
             <file>file:/C:/Users/Nerea/Documents/GitHub/Proyecto/ProyectoHosteleria/src/proyectohosteleria/VistaMesas.java</file>
-            <file>file:/C:/Users/Nerea/Documents/GitHub/Proyecto/ProyectoHosteleria/src/proyectohosteleria/ModeloFechas.java</file>
-            <file>file:/C:/Users/Nerea/Documents/GitHub/Proyecto/ProyectoHosteleria/src/proyectohosteleria/HiloEnvio.java</file>
+            <file>file:/C:/Users/Nerea/Documents/GitHub/Proyecto/ProyectoHosteleria/src/proyectohosteleria/ModeloSeparar.java</file>
+            <file>file:/C:/Users/Nerea/Documents/GitHub/Proyecto/ProyectoHosteleria/src/proyectohosteleria/VistaSeparar.java</file>
+            <file>file:/C:/Users/Nerea/Documents/GitHub/Proyecto/ProyectoHosteleria/src/proyectohosteleria/ProyectoHosteleria.java</file>
         </group>
     </open-files>
 </project-private>

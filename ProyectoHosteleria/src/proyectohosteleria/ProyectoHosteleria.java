@@ -21,9 +21,11 @@ public class ProyectoHosteleria {
              if (!fichero.exists()) {
                  new VistaConfiguracion(new JFrame(),true).setVisible(true);
              }
-             else
-                 getResolucion();
-                  //System.out.print("existe");
+             else{
+                  VistaPrincipal principal= new VistaPrincipal("Terminal hostelería");
+            
+                principal.setVisible(true);
+        }
     }
     
     public static void getResolucion(){

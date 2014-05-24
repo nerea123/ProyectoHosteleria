@@ -293,9 +293,10 @@ public class ModeloPrincipal implements Serializable {
             public void actionPerformed(ActionEvent e) {
                 int alerta = Alerta.creaAlertaWarning("¿Cobrar cuenta?", "Cobrar", null);
               if(alerta==0){
+                  VistaPrincipal p=null;
                     try {
                         Statement statement = (Statement)Conexion.getInstance().conectar().createStatement();
-                        VistaPrincipal p=(VistaPrincipal)frame;
+                        p=(VistaPrincipal)frame;
                         statement.executeUpdate("update tiquet set COBRADO=1 where IDT="+p.getIdtiquet() );
                     } catch (SQLException ex) {
                         Logger.getLogger(ModeloPrincipal.class.getName()).log(Level.SEVERE, null, ex);
@@ -316,6 +317,8 @@ public class ModeloPrincipal implements Serializable {
                     cierraMesas(cobrar,frame,label,table);
                     for(int i=modelo.getRowCount();i>0;i--)
                                 modelo.removeRow(i-1);
+                    if(p.getTitle().equalsIgnoreCase("Terminal hostelería"))
+                        creaIdTiquet(p);
               }
             }
         };

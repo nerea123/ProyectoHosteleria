@@ -20,6 +20,8 @@ public class ModeloSeparar {
     JLabel label;
      float totalF;
      float total2=0;
+     private JTable table1;
+     private JTable table2;
      private DefaultTableModel model = new DefaultTableModel();
      private DefaultTableModel modelo = new DefaultTableModel();
      
@@ -35,6 +37,9 @@ public class ModeloSeparar {
             model.addColumn(modelo.getColumnName(i));
          tabla.setModel(model);
          
+         
+         table1=table;
+         table2=tabla;
      }
      
     public void ponActionLisstener(JButton boton,final JTable table,final JTable tabla,final JLabel total,final JLabel total1,final VistaPrincipal frame,final ModeloPrincipal principal){
@@ -97,6 +102,10 @@ public class ModeloSeparar {
                 label.setText("TOTAL: 0");
                 for(int i=model.getRowCount();i>0;i--)
                       model.removeRow(i-1);
+                
+                if(table1.getRowCount() == 0){
+                     frame.dispose();
+                 }
               }  
             }
         };
@@ -128,6 +137,9 @@ public class ModeloSeparar {
                 for(int i=modelo.getRowCount();i>0;i--)
                       modelo.removeRow(i-1);
                  principal.setNumFila(0);
+                 if(table2.getRowCount() == 0){
+                     frame.dispose();
+                 }
                 }
 
             }
