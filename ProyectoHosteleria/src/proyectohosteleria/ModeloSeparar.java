@@ -83,7 +83,7 @@ public class ModeloSeparar {
             boton.addActionListener(action);
       }
     
-    public void ponActionListenerCobrar2(JButton boton,final JLabel label,final JFrame frame,final JTable table,final ModeloPrincipal principal){
+    public void ponActionListenerCobrar2(JButton boton,final JLabel label,final VistaPrincipal frame,final JTable table,final ModeloPrincipal principal){
     ActionListener actionListener = new ActionListener() {
 
             @Override
@@ -103,7 +103,7 @@ public class ModeloSeparar {
                 for(int i=model.getRowCount();i>0;i--)
                       model.removeRow(i-1);
                 
-                if(table1.getRowCount() == 0){
+                if(table1.getRowCount() == 0  && !frame.getTitle().equalsIgnoreCase("Terminal hostelería")){
                      frame.dispose();
                  }
               }  
@@ -137,7 +137,7 @@ public class ModeloSeparar {
                 for(int i=modelo.getRowCount();i>0;i--)
                       modelo.removeRow(i-1);
                  principal.setNumFila(0);
-                 if(table2.getRowCount() == 0){
+                 if(table2.getRowCount() == 0 && !frame.getTitle().equalsIgnoreCase("Terminal hostelería")){
                      frame.dispose();
                  }
                 }
